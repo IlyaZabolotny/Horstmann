@@ -1,5 +1,6 @@
 package com.mycompany.HorstmannTasks.ch01;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -10,23 +11,46 @@ public class Task14 {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        System.out.print("Enter the matrix size: ");
-        int length = in.nextInt();
+        System.out.println("Enter line by line a two-dimensional array of integers: ");
+
+        int[] iLine = {};
+        boolean done = false;
+        while (!done) {
+        try {
+            String line = in.nextLine();
+            String[] sLine = line.split(" ");
+            iLine = Arrays.stream(sLine).mapToInt(Integer::parseInt).toArray();
+            done = true;
+        } catch (NumberFormatException exception) {
+            System.out.println("Input a line of integers again.");
+        }
+        }
+
+        int length = iLine.length;
         int[][] square = new int[length][length];
-        System.out.print("Enter values: ");
-        for (int i = 0; i < square.length; i++) {
-            for (int j = 0; j < square[0].length; j++) {
-                square[i][j] = in.nextInt();
+        for (int i = 0; i<length; i++) {
+            square[0][i] = iLine[i];
+        }
+        int counter = 1;
+        while (counter < length) {
+            String line = in.nextLine();
+            String[] sLine = line.split(" ");
+            try {
+                iLine = Arrays.stream(sLine).mapToInt(Integer::parseInt).toArray();
+                if (iLine.length != length) {
+                    System.out.println("The number of integers in the line should be equals to " + length);
+                    continue;
+                }
+                for (int i = 0; i < length; i++) {
+                    square[counter][i] = iLine[i];
+                }
+                counter++;
+            } catch (NumberFormatException exception) {
+                System.out.println("Input a line of integers again.");
             }
         }
 
-        for (int[] ints : square) {
-            for (int j = 0; j < ints.length; j++) {
-                System.out.print(ints[j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println(isMagicSquare(square) ? "It`s a magic square" : "It`s ordinary square");
+        System.out.println(isMagicSquare(square) ? "It`s a magic square" : "It`s an ordinary square");
     }
 
     private static boolean isMagicSquare(int[][] square) {
