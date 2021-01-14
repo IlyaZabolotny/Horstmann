@@ -11,11 +11,11 @@ public class Task7 {
         int firstNum =  (int) in.nextLong();
         int secondNum = (int) in.nextLong();
 
-        System.out.printf("Unsigned sum: %d\n", Integer.sum(firstNum, secondNum));
-        System.out.printf("Difference: %d\n", firstNum - secondNum);
-        System.out.printf("Product: %d\n", firstNum * secondNum);
-        System.out.printf("Quotient: %d\n", Integer.divideUnsigned(firstNum, secondNum));
-        System.out.printf("Remainder: %d\n", Integer.remainderUnsigned(firstNum,secondNum));
+        System.out.printf("Unsigned sum: %d\n", Math.abs(Integer.sum(firstNum, secondNum)));
+        System.out.printf("Difference: %d\n", Math.abs(firstNum - secondNum));
+        System.out.printf("Product: %d\n", Math.abs(firstNum * secondNum));
+        System.out.printf("Quotient: %d\n", Math.abs(Integer.divideUnsigned(firstNum, secondNum)));
+        System.out.printf("Remainder: %d\n", Math.abs(Integer.remainderUnsigned(firstNum,secondNum)));
 
     }
 
